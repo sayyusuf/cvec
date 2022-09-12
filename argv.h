@@ -28,4 +28,8 @@ void	*argv_pull(argv_t *argv);
 
 int	argv_try(argv_t *argv, void *addr, size_t index, int (*fptr)(void *, void *));
 
+int	argv_reverse(argv_t	*argv);
+
+argv_t	*argv_splice(argv_t *argv, size_t index, size_t n);
+
 #endif
