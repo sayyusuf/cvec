@@ -1,7 +1,7 @@
-#ifndef ARGV_H
-# define ARGV_H
+#ifndef ARGV_LIB_H
+# define ARGV_LIB_H
 
-# include <array.h>
+# include <array_lib.h>
 # include <stdlib.h>
 # include <stddef.h>
 

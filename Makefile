@@ -1,6 +1,6 @@
 NAME = argv.a
 
-_SRC =  array.c array_insert.c array_del.c array_utils.c array_copy.c  argv.c argv_utils.c argv_insert.c argv_del.c
+_SRC =  array_lib.c  argv_lib.c
 
 _OBJ = $(_SRC:.c=.o)
 
