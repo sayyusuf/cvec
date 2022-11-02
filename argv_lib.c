@@ -29,7 +29,7 @@ argv_t	*argv_splice(argv_t *argv, size_t index, size_t n)
 {
 	argv_t	*ret;
 
-	if (argv == NULL || n == 0 || argv->len <= index + n)
+	if (argv == NULL || n == 0 || argv->len <= index || argv->len < index + n || !n)
 		return (NULL);
 	ret = argv_new(NULL, NULL);
 	argv_insert_array_n(ret, 0, &argv->array[index], n);
@@ -89,7 +89,7 @@ int	argv_del_n(argv_t *argv, size_t index, void (*del)(void *), size_t n)
 {
 	int	res;
 
-	if (argv == NULL || argv->len <= index + n || !n)
+	if (argv == NULL || argv->len <= index || argv->len < index + n || !n)
 		return (-1);
 	res = array_del_n(&argv->array[index], argv->len - index, del, n);
 	if (-1 != res)
