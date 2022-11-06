@@ -1,5 +1,63 @@
 #include <array_lib.h>
 
+size_t	find_max_bit(size_t num)
+{
+	size_t	max;
+
+	max = 0;
+	while (num)
+	{
+		++max;
+		num >>= 1;
+	}
+	return (max);
+}
+
+size_t	array_len(void *array[])
+{
+	size_t	i;
+
+	if (array == NULL)
+		return (0);
+	i = 0;
+	while (array[i] != NULL)
+		++i;
+	return (i);
+}
+
+int	array_shift_right(void *array[], size_t len, size_t n)
+{
+	if (array == NULL)
+		return (-1);
+	if (n == 0)
+		return (0);
+	array[len + n] = NULL;
+	while (len)
+	{
+		--len;
+		array[len + n] = array[len];
+	}
+	return (0);
+}
+
+int	array_shift_left(void *array[], size_t len, size_t n)
+{
+	size_t	i;
+
+	if (array == NULL || len < n)
+		return (-1);
+	if (n == 0)
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		array[i] = array[i + n];
+		++i;
+	}
+	array[i] = NULL;
+	return (0);
+}
+
 int	array_destroy(void *array[], void (*del)(void *))
 {
 	size_t	i;
@@ -160,60 +218,3 @@ int	array_insert_array_n(void *array[], size_t len, void *addr[], size_t n)
 	return (0);
 }
 
-size_t	find_max_bit(size_t num)
-{
-	size_t	max;
-
-	max = 0;
-	while (num)
-	{
-		++max;
-		num >>= 1;
-	}
-	return (max);
-}
-
-size_t	array_len(void *array[])
-{
-	size_t	i;
-
-	if (array == NULL)
-		return (0);
-	i = 0;
-	while (array[i] != NULL)
-		++i;
-	return (i);
-}
-
-int	array_shift_right(void *array[], size_t len, size_t n)
-{
-	if (array == NULL)
-		return (-1);
-	if (n == 0)
-		return (0);
-	array[len + n] = NULL;
-	while (len)
-	{
-		--len;
-		array[len + n] = array[len];
-	}
-	return (0);
-}
-
-int	array_shift_left(void *array[], size_t len, size_t n)
-{
-	size_t	i;
-
-	if (array == NULL || len < n)
-		return (-1);
-	if (n == 0)
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		array[i] = array[i + n];
-		++i;
-	}
-	array[i] = NULL;
-	return (0);
-}
