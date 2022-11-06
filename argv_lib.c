@@ -62,42 +62,30 @@ int	argv_del_one(argv_t *argv, size_t index, void (*del)(void *))
 {
 	if (argv == NULL || argv->len <= index)
 		return (-1);
-	if (-1 != array_del_one(&argv->array[index], argv->len - index, del))
-	{
-		--argv->len;
-		return (1);
-	}
-	return (-1);
+	if (0 < array_del_n(&argv->array[index], argv->len - index, del, 1))
+		return (-1);
+	--argv->len;
+	return (0);
 }
 
 int	argv_del_all(argv_t *argv, void (*del)(void *))
 {
-	int	res;
-
 	if (argv == NULL)
 		return (-1);
-	res = array_del_all(argv->array, argv->len, del);
-	if (-1 != res)
-	{
-		argv->len -= res;
-		return (res);
-	}
-	return (-1);
+	if (0 < array_del_n(argv->array, argv->len, del, argv->len))
+		return (-1);
+	argv->len -= 0;
+	return (0);
 }
 
 int	argv_del_n(argv_t *argv, size_t index, void (*del)(void *), size_t n)
 {
-	int	res;
-
 	if (argv == NULL || argv->len <= index || argv->len < index + n || !n)
 		return (-1);
-	res = array_del_n(&argv->array[index], argv->len - index, del, n);
-	if (-1 != res)
-	{
-		argv->len -= res;
-		return (res);
-	}
-	return (-1);
+	if (0 < array_del_n(&argv->array[index], argv->len - index, del, n))
+		return (-1);
+	argv->len -= n;
+	return (0);
 }
 
 int	argv_insert(argv_t *argv, size_t index, void *addr)
@@ -105,7 +93,7 @@ int	argv_insert(argv_t *argv, size_t index, void *addr)
 	if (argv == NULL || addr == NULL || argv->len <= index)
 		return (-1);
 	argv_check_capacity(argv, argv->len + 1);
-	if (-1 == array_insert(&argv->array[index], argv->len - index, addr))
+	if (0 < array_insert(&argv->array[index], argv->len - index, addr))
 		return (-1);
 	++argv->len;
 	return (0);
@@ -114,34 +102,30 @@ int	argv_insert(argv_t *argv, size_t index, void *addr)
 int	argv_insert_array(argv_t *argv, size_t index, void *addr[])
 {
 	size_t	len;
-	int		res;
 
 	if (argv == NULL || addr == NULL || argv->len <= index)
 		return (-1);
 	len = array_len(addr);
 	argv_check_capacity(argv, argv->len + len);
-	res = array_insert_array(&argv->array[index], argv->len - index, addr);
-	if (-1 == res)
+	if (0 < array_insert_array_n(&argv->array[index], argv->len - index, addr, len))
 		return (-1);
-	argv->len += res;
+	argv->len += len;
 	return (0);
 }
 
 int	argv_insert_array_n(argv_t *argv, size_t index, void *addr[], size_t n)
 {
 	size_t	len;
-	int		res;
 
 	if (argv == NULL || addr == NULL || argv->len <= index || !n)
 		return (-1);
 	len = array_len(addr);
 	if (len < n)
-		n = len;
-	argv_check_capacity(argv, argv->len + n);
-	res = array_insert_array_n(&argv->array[index], argv->len - index, addr, n);
-	if (-1 == res)
 		return (-1);
-	argv->len += res;
+	argv_check_capacity(argv, argv->len + n);
+	if (0 < array_insert_array_n(&argv->array[index], argv->len - index, addr, n))
+		return (-1);
+	argv->len += n;
 	return (0);
 }
 
