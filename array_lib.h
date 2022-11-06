@@ -11,9 +11,7 @@ int		array_shift_left(void *array[], size_t len, size_t n);
 int		array_destroy(void *array[], void (*del)(void *));
 int		array_del_n(void *array[], size_t len, void (*del)(void *), size_t n);
 
-void	**array_copy_addr(void *dest[], void *src[]);
 void	**array_copy_addr_n(void *dest[], void *src[], size_t n);
-void	**array_deep_copy(void *dest[], void *src[], void *(*copy)(void *));
 void	**array_deep_copy_n(void *dest[], void *src[], void *(*copy)(void *), size_t n);
 
 void	**array_expand(void *array[], size_t expansion_len);

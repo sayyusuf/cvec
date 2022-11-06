@@ -40,20 +40,22 @@ argv_t	*argv_splice(argv_t *argv, size_t index, size_t n)
 argv_t	*argv_new(void *array[], void *(*fptr)(void *))
 {
 	argv_t	*argv;
+	size_t	array_l;
 
+	array_l = array_len(array);
 	argv = malloc(sizeof(argv_t));
 	if (argv == NULL)
 		return (NULL);
 	argv->try_index = 0;
 	argv->try_condition = 0;
-	argv->len = array_len(array);
+	argv->len = array_l;
 	argv->capacity = 1 << find_max_bit(argv->len);
 	if (fptr == NULL)
 		argv->array = array_expand(array, argv->capacity);
 	else
 	{
 		argv->array = array_expand(NULL, argv->capacity);
-		array_deep_copy(argv->array, array, fptr);
+		array_deep_copy_n(argv->array, array, fptr, array_l);
 	}
 	return (argv);
 }

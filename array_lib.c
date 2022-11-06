@@ -117,22 +117,6 @@ void	**array_expand(void *array[], size_t expansion_len)
 	return (tmp);
 }
 
-void	**array_copy_addr(void *dest[], void *src[])
-{
-	size_t	i;
-
-	if (dest == NULL || src == NULL)
-		return (NULL);
-	i = 0;
-	while (src[i] != NULL)
-	{
-		dest[i] = src[i];
-		++i;
-	}
-	dest[i] = NULL;
-	return (dest);
-}
-
 void	**array_copy_addr_n(void *dest[], void *src[], size_t n)
 {
 	size_t	i;
@@ -143,22 +127,6 @@ void	**array_copy_addr_n(void *dest[], void *src[], size_t n)
 	while (src[i] != NULL && i < n)
 	{
 		dest[i] = src[i];
-		++i;
-	}
-	dest[i] = NULL;
-	return (dest);
-}
-
-void	**array_deep_copy(void *dest[], void *src[], void *(*copy)(void *))
-{
-	size_t	i;
-
-	if (dest == NULL || src == NULL || copy == NULL)
-		return (NULL);
-	i = 0;
-	while (src[i] != NULL)
-	{
-		dest[i] = copy(src[i]);
 		++i;
 	}
 	dest[i] = NULL;
@@ -185,7 +153,6 @@ int	array_del_n(void *array[], size_t len, void (*del)(void *), size_t n)
 {
 	size_t	i;
 
-	len = 0;
 	if (array == NULL)
 		return (-1);
 	i = 0;
