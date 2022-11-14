@@ -4,7 +4,7 @@ int	argv_destroy(argv_t *argv, void (*del)(void *))
 {
 	if (argv == NULL)
 		return (-1);
-	vector_destroy(argv->vector, del);
+	vector_destroy(argv->vector, del, argv->len);
 	free(argv);
 	return (0);
 }

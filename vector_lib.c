@@ -58,7 +58,7 @@ int	vector_shift_left(void *vector[], size_t len, size_t n)
 	return (0);
 }
 
-int	vector_destroy(void *vector[], void (*del)(void *))
+int	vector_destroy(void *vector[], void (*del)(void *), size_t len)
 {
 	size_t	i;
 
@@ -67,7 +67,7 @@ int	vector_destroy(void *vector[], void (*del)(void *))
 	i = 0;
 	if (del != NULL)
 	{
-		while (vector[i] != NULL)
+		while (i < len)
 		{
 			del(vector[i]);
 			++i;
@@ -124,7 +124,7 @@ void	**vector_copy_addr_n(void *dest[], void *src[], size_t n)
 	if (dest == NULL || src == NULL || !n)
 		return (NULL);
 	i = 0;
-	while (src[i] != NULL && i < n)
+	while (i < n)
 	{
 		dest[i] = src[i];
 		++i;
@@ -140,7 +140,7 @@ void	**vector_deep_copy_n(void *dest[], void *src[], void *(*copy)(void *), size
 	if (dest == NULL || src == NULL || !n || copy == NULL)
 		return (NULL);
 	i = 0;
-	while (src[i] != NULL && i < n)
+	while (i < n)
 	{
 		dest[i] = copy(src[i]);
 		++i;
@@ -162,7 +162,7 @@ int	vector_del_n(void *vector[], size_t len, void (*del)(void *), size_t n)
 			return (-1);
 		return (vector_shift_left(vector, len, n));
 	}
-	while (vector[i] != NULL && i < n)
+	while (i < n)
 		del(vector[i++]);
 	return (vector_shift_left(vector, len, i));
 }
