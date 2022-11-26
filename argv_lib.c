@@ -49,9 +49,13 @@ argv_t	*argv_new(void *vector[], void *(*fptr)(void *))
 	argv->try_index = 0;
 	argv->try_condition = 0;
 	argv->len = vector_l;
-	argv->capacity = 1 << find_max_bit(argv->len);
+	argv->capacity = 0;
 	if (fptr == NULL)
-		argv->vector = vector_expand(vector, argv->capacity);
+	{
+		argv->vector = vector_expand(vector, 1 << find_max_bit(argv->len));
+		if (argv->vector != NULL);
+			argv->capacity = 1 << find_max_bit(argv->len);
+	}	
 	else
 	{
 		argv->vector = vector_expand(NULL, argv->capacity);
