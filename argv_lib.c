@@ -183,10 +183,11 @@ int	argv_check_capacity(argv_t *argv, size_t len)
 		return (-1);
 	tmp = NULL;
 	ex_len = argv->capacity;
-	if (!ex_len)
-		ex_len = 1;
+	
 	while (ex_len <= len)
 	{
+		if (!ex_len)
+			ex_len = 1;
 		ex_len *= 2;
 		if (ex_len <= len)
 			continue ;
