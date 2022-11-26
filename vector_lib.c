@@ -102,8 +102,6 @@ void	**vector_expand(void *vector[], size_t expansion_len)
 	void	**tmp;
 	size_t	i;
 
-	if (vector == NULL)
-		return (NULL);
 	tmp = malloc(sizeof(void *) * (expansion_len + 1));
 	if (tmp == NULL)
 		return (NULL);

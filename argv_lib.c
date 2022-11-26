@@ -53,7 +53,7 @@ argv_t	*argv_new(void *vector[], void *(*fptr)(void *))
 	if (fptr == NULL)
 	{
 		argv->vector = vector_expand(vector, 1 << find_max_bit(argv->len));
-		if (argv->vector != NULL);
+		if (argv->vector != NULL)
 			argv->capacity = 1 << find_max_bit(argv->len);
 	}	
 	else
@@ -183,6 +183,8 @@ int	argv_check_capacity(argv_t *argv, size_t len)
 		return (-1);
 	tmp = NULL;
 	ex_len = argv->capacity;
+	if (!ex_len)
+		ex_len = 1;
 	while (ex_len <= len)
 	{
 		ex_len *= 2;
