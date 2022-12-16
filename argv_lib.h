@@ -30,7 +30,7 @@ int		argv_push(argv_t *argv, void *address);
 void	*argv_pull(argv_t *argv);
 
 int		argv_try(argv_t *argv, void *addr, size_t index, int (*fptr)(void *, void *));
-argv_t	*argv_splice(argv_t *argv, size_t index, size_t n);
+argv_t	*argv_cut(argv_t *argv, size_t index, size_t n);
 argv_t	*argv_new(void *vector[], void *(*fptr)(void *));
 int		argv_destroy(argv_t *argv, void (*del)(void *));
 
