@@ -25,7 +25,7 @@ int	argv_try(argv_t *argv, void *addr, size_t index, int (*fptr)(void *, void *)
 	return (-1);
 }
 
-argv_t	*argv_cut(argv_t *argv, size_t index, size_t n)
+argv_t	*argv_splice(argv_t *argv, size_t index, size_t n)
 {
 	argv_t	*ret;
 
