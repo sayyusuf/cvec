@@ -5,7 +5,7 @@ _SRC =  vector_lib.c  argv_lib.c
 _OBJ = $(_SRC:.c=.o)
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror  -g
 
 .PHONY: all clean fclean re bonus
 all: $(NAME)

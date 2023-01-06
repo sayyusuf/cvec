@@ -48,17 +48,13 @@ argv_t	*argv_new(void *vector[], void *(*fptr)(void *))
 		return (NULL);
 	argv->try_index = 0;
 	argv->try_condition = 0;
+	argv->capacity = 1 << find_max_bit(vector_l);
 	argv->len = vector_l;
-	argv->capacity = 0;
 	if (fptr == NULL)
-	{
-		argv->vector = vector_expand(vector, 1 << find_max_bit(argv->len));
-		if (argv->vector != NULL)
-			argv->capacity = 1 << find_max_bit(argv->len);
-	}	
+		argv->vector = vector_expand(vector, argv->capacity);
 	else
 	{
-		argv->vector = vector_expand(NULL, argv->capacity);
+		argv->vector = vector_expand(NULL,argv->capacity);
 		vector_deep_copy_n(argv->vector, vector, fptr, vector_l);
 	}
 	return (argv);
