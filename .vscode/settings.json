@@ -3,6 +3,8 @@
         "__bit_reference": "c",
         "__split_buffer": "c",
         "string": "c",
-        "vector": "c"
+        "vector": "c",
+        "search.h": "c",
+        "memory.h": "c"
     }
 }

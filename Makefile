@@ -1,6 +1,6 @@
-NAME = argv.a
+NAME = cvec.a
 
-_SRC =  vector_lib.c  argv_lib.c
+_SRC =  cvec.c
 
 _OBJ = $(_SRC:.c=.o)
 
