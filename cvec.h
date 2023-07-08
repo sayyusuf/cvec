@@ -17,9 +17,9 @@ typedef struct cvec_s
 } cvec_t;
 
 
-#define CVEC_NEW(vec, type, capacity) cvec_new(&vec, sizeof(type), capacity)
+#define CVEC_NEW(vec, type, capacity) cvec_init(&vec, sizeof(type), capacity)
 
-int		cvec_new(cvec_t *vec ,size_t type_size, size_t capacity);
+int		cvec_init(cvec_t *vec ,size_t type_size, size_t capacity);
 void	cvec_destroy(cvec_t *vec , void (*iter)(void *));
 
 

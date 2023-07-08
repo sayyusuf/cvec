@@ -19,7 +19,7 @@ int	cvec_resize(cvec_t *vec, size_t capacity)
 	return (0);
 }
 
-int cvec_new(cvec_t *vec,size_t type_size, size_t capacity)
+int cvec_init(cvec_t *vec,size_t type_size, size_t capacity)
 {
 	if (!vec)
 		return (-1);
