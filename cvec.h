@@ -7,7 +7,7 @@
 
 typedef struct cvec_s
 {
-	size_t		size;		// number of elemnts
+	size_t		size;		// number of elements
 	size_t		pcap;		// + capacity	
 	size_t		ncap;		// - capacity
 	size_t		tcap;		// total capacity
@@ -29,6 +29,8 @@ int		cvec_get(cvec_t *vec, void *addr, size_t index);
 
 int		cvec_insert(cvec_t *vec, void *addr, size_t index);
 int		cvec_erase(cvec_t *vec, size_t index, void (*destroy)(void*));
+
+int 	cvec_iter(cvec_t *vec, void *any, void (*f)(void *elemnet_addr, void *any));
 
 
 #endif

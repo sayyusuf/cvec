@@ -1,8 +1,19 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "cvec.h"
+#include "../cvec.h"
 //GENERATE_VECTOR_HEADER(int, INT)
+
+
+
+void test(void *element_addr, void *any)
+{
+
+  const int s = *((int *)element_addr);
+  
+  printf("%d\n", s);
+
+}
 
 
  int    main()
@@ -26,19 +37,20 @@
     cvec_get(&vec, &a, 0); printf("a= %d\n",a);
     cvec_get(&vec, &a, 3); printf("a= %d\n",a);
 
-    c =  cvec_erase(&vec, 0, NULL);
+   // c =  cvec_erase(&vec, 0, NULL);
     b =  cvec_get(&vec, &a, 0);
     printf ("erase_st= %d, get_st= %d, a= %d\n",c ,b, a); 
 
-    c =  cvec_erase(&vec, 0, NULL);
+//    c =  cvec_erase(&vec, 0, NULL);
     b =  cvec_get(&vec, &a, 0);
     printf ("erase_st= %d, get_st= %d, a= %d\n",c ,b, a); 
 
-    c =  cvec_erase(&vec, 0, NULL);
+//    c =  cvec_erase(&vec, 0, NULL);
     b =  cvec_get(&vec, &a, 0);
     printf ("erase_st= %d, get_st= %d, a= %d\n",c ,b, a); 
 
 
+    cvec_iter(&vec, NULL, test);
 
     printf("tsz %lu size %lu tcap %lu ncap %lu pcap %lu aa %p, va %p\n", vec.tsz, vec.size, vec.tcap, vec.ncap, vec.pcap, vec.aaddr, vec.vaddr);
     

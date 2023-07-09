@@ -1,4 +1,4 @@
-#include <cvec.h>
+#include "cvec.h"
 #include <string.h>
 
 int	cvec_resize(cvec_t *vec, size_t capacity)
@@ -124,3 +124,14 @@ int	cvec_erase(cvec_t *vec, size_t index, void (*destroy)(void*))
 	return (0);
 }
 
+int cvec_iter(cvec_t *vec, void *any,  void (*f)(void *elemnet_addr, void *any))
+{
+	size_t i;
+
+	if (!vec || !f)
+		return (-1);
+	i = 0;
+	while (i < vec->size)
+		f(vec->vaddr + (vec->tsz * i++), any);
+	return (0);
+}
