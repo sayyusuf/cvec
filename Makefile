@@ -1,4 +1,4 @@
-NAME = cvec.a
+NAME = libcvec.a
 
 _SRC =  cvec.c
 
