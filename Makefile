@@ -5,7 +5,7 @@ _SRC =  cvec.c
 _OBJ = $(_SRC:.c=.o)
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror  -g
+CFLAGS = -Wall -Wextra -Werror  -g
 
 .PHONY: all clean fclean re bonus
 all: $(NAME)
