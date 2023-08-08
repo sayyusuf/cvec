@@ -5,9 +5,9 @@ _SRC =  cvec.c
 _OBJ = $(_SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror  -g
+CFLAGS = -Wall -Wextra -Werror
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re test
 all: $(NAME)
 
 $(NAME): $(_OBJ)
@@ -22,3 +22,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+test:
+	echo "cvec test"
