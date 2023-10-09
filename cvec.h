@@ -1,9 +1,14 @@
-#ifndef CVEC_H
-# define CVEC_H
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-# include <stdlib.h>
-# include <stddef.h>
-# include <stdint.h>
+
+#ifndef CVEC_H
+#define CVEC_H
+
+#include <stdlib.h>
+#include <stddef.h>
+#include <stdint.h>
 
 typedef struct cvec_s
 {
@@ -19,18 +24,34 @@ typedef struct cvec_s
 
 #define CVEC_NEW(vec, type, capacity) cvec_init(&vec, sizeof(type), capacity)
 
-int		cvec_init(cvec_t *vec ,size_t type_size, size_t capacity);
+int	cvec_init(cvec_t *vec ,size_t type_size, size_t capacity);
 void	cvec_destroy(cvec_t *vec , void (*iter)(void *));
 
 
-int 	cvec_push(cvec_t *vec, void *addr);
-int 	cvec_pop(cvec_t *vec, void *addr);
-int		cvec_get(cvec_t *vec, void *addr, size_t index);
+int
+cvec_push(cvec_t *vec, void *addr);
 
-int		cvec_insert(cvec_t *vec, void *addr, size_t index);
-int		cvec_erase(cvec_t *vec, size_t index, void (*destroy)(void*));
+int
+cvec_pop(cvec_t *vec, void *addr);
 
-int 	cvec_iter(cvec_t *vec, void *any, void (*f)(void *elemnet_addr, void *any));
+int
+cvec_get(cvec_t *vec, void *addr, size_t index);
+
+void	*
+cvec_ptr(cvec_t *vec, size_t index);
+
+
+int
+cvec_insert(cvec_t *vec, void *addr, size_t index);
+int
+cvec_erase(cvec_t *vec, size_t index, void (*destroy)(void*));
+
+int
+cvec_iter(cvec_t *vec, void *any, void (*f)(void *elemnet_addr, void *any));
 
 
 #endif
+#ifdef __cplusplus
+ }
+#endif
+

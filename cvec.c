@@ -1,7 +1,12 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "cvec.h"
 #include <string.h>
 
-int	cvec_resize(cvec_t *vec, size_t capacity)
+int
+cvec_resize(cvec_t *vec, size_t capacity)
 {
 	void	*tmp;
 	void	*vtmp;
@@ -19,7 +24,8 @@ int	cvec_resize(cvec_t *vec, size_t capacity)
 	return (0);
 }
 
-int cvec_init(cvec_t *vec,size_t type_size, size_t capacity)
+int
+cvec_init(cvec_t *vec,size_t type_size, size_t capacity)
 {
 	if (!vec)
 		return (-1);
@@ -31,7 +37,8 @@ int cvec_init(cvec_t *vec,size_t type_size, size_t capacity)
 	return (0);
 }
 
-void	cvec_destroy(cvec_t *vec, void (*iter)(void *))
+void
+cvec_destroy(cvec_t *vec, void (*iter)(void *))
 {
 	size_t	i;
 
@@ -46,7 +53,8 @@ void	cvec_destroy(cvec_t *vec, void (*iter)(void *))
 
 
 
-int cvec_push(cvec_t *vec, void *addr)
+int
+cvec_push(cvec_t *vec, void *addr)
 {
 	if (!vec || !addr)
 		return (-1);
@@ -57,7 +65,8 @@ int cvec_push(cvec_t *vec, void *addr)
 	return (0);
 }
 
-int	cvec_pop(cvec_t *vec, void *addr)
+int
+cvec_pop(cvec_t *vec, void *addr)
 {
 	if (!vec || !addr || !vec->size)
 		return (-1);
@@ -65,7 +74,8 @@ int	cvec_pop(cvec_t *vec, void *addr)
 	return 0;
 }
 
-int	cvec_get(cvec_t *vec, void *addr, size_t index)
+int
+cvec_get(cvec_t *vec, void *addr, size_t index)
 {
 	if (!vec || !addr || !vec->size || index > vec->size - 1)
 		return (-1);
@@ -73,9 +83,18 @@ int	cvec_get(cvec_t *vec, void *addr, size_t index)
 	return 0;
 }
 
+void	*
+cvec_ptr(cvec_t *vec, size_t index)
+{
+	if (!vec || !vec->size || index > vec->size - 1)
+		return (NULL);
+	return (vec->vaddr + (vec->tsz * index));
+}
 
 
-int	cvec_insert(cvec_t *vec, void *addr, size_t index)
+
+int
+cvec_insert(cvec_t *vec, void *addr, size_t index)
 {
 	if (!vec || !addr || index > vec->size)
 		return (-1);
@@ -102,7 +121,8 @@ int	cvec_insert(cvec_t *vec, void *addr, size_t index)
 	return (0);
 }
 
-int	cvec_erase(cvec_t *vec, size_t index, void (*destroy)(void*))
+int
+cvec_erase(cvec_t *vec, size_t index, void (*destroy)(void*))
 {
 
 	if (!vec || index >= vec->size)
@@ -124,7 +144,8 @@ int	cvec_erase(cvec_t *vec, size_t index, void (*destroy)(void*))
 	return (0);
 }
 
-int cvec_iter(cvec_t *vec, void *any,  void (*f)(void *elemnet_addr, void *any))
+int
+cvec_iter(cvec_t *vec, void *any,  void (*f)(void *elemnet_addr, void *any))
 {
 	size_t i;
 
@@ -135,3 +156,8 @@ int cvec_iter(cvec_t *vec, void *any,  void (*f)(void *elemnet_addr, void *any))
 		f(vec->vaddr + (vec->tsz * i++), any);
 	return (0);
 }
+
+#ifdef __cplusplus
+ }
+#endif
+

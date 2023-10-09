@@ -1,18 +1,28 @@
-NAME = libcvec.a
+NAME_AR =	libcvec.a
+NAME_DYN =	libcvec.so
 
-_SRC =  cvec.c
+NAME =		libcvec
+_SRC =  	cvec.c
 
-_OBJ = $(_SRC:.c=.o)
+_OBJ =		$(_SRC:.c=.o)
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC =		gcc
+CFLAGS =	-Wall -Wextra -Werror
 
-.PHONY: all clean fclean re test
-all: $(NAME)
+.PHONY:		all clean fclean re test
 
-$(NAME): $(_OBJ)
+all:		$(NAME)
+
+
+$(NAME):	$(NAME_AR)  $(NAME_DYN)
+
+$(NAME_DYN): $(_OBJ)
+	$(CC) -shared $^ -o $@
+
+$(NAME_AR): $(_OBJ)
 	ar -rcs $@ $^
 	ranlib $@
+
 %.o: %.c
 	$(CC)  $(FLAGS) -I./ -c $< -o $@
 
@@ -24,4 +34,4 @@ fclean: clean
 re: fclean all
 
 test:
-	echo "cvec test"
+	@echo "cvec test"
