@@ -29,7 +29,7 @@ $(NAME_AR): $(_OBJ)
 clean : 
 	rm -f $(_OBJ)
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME).*
 
 re: fclean all
 
