@@ -1,20 +1,20 @@
-NAME_AR =	libcvec.a
-NAME_DYN =	libcvec.so
+NAME = libcvec
+NAME_AR = $(NAME).a
+NAME_DYN = $(NAME).so
 
-NAME =		libcvec
-_SRC =  	cvec.c
+_SRC = cvec.c
 
-_OBJ =		$(_SRC:.c=.o)
+_OBJ = $(_SRC:.c=.o)
 
-CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror
+CC = gcc
+CFLAGS += -Wall -Wextra -Werror
 
-.PHONY:		all clean fclean re test
+.PHONY: all clean fclean re test
 
-all:		$(NAME)
+all: $(NAME)
 
 
-$(NAME):	$(NAME_AR)  $(NAME_DYN)
+$(NAME): $(NAME_AR)  $(NAME_DYN)
 
 $(NAME_DYN): $(_OBJ)
 	$(CC) -shared $^ -o $@
