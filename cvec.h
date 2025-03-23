@@ -11,7 +11,7 @@ extern "C" {
 #include <stdint.h>
 
 
-#define CVEC_NEW(vec, type, capacity) cvec_init(&vec, sizeof(type), capacity)
+#define CVEC_INIT(vec, type, capacity) cvec_init(&vec, sizeof(type), capacity)
 
 typedef struct cvec
 {

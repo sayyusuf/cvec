@@ -1,37 +1,21 @@
-NAME = libcvec
-NAME_AR = $(NAME).a
-NAME_DYN = $(NAME).so
-
-_SRC = cvec.c
-
-_OBJ = $(_SRC:.c=.o)
-
-CC = gcc
-CFLAGS += -Wall -Wextra -Werror
-
-.PHONY: all clean fclean re test
-
-all: $(NAME)
+MODULE_NAME	= cvec
+NAME		= cvec
+_SRC		= cvec.c
+_INC		= cvec.h
+EXTRAFLAGS	+= -Wall -Wextra -Werror
+DEBUGFLAGS	+= -g -fsanitize=address
+EXLIBS +=			# -lm
 
 
-$(NAME): $(NAME_AR)  $(NAME_DYN)
+#DEP1 =			# Dependent module's name
+#DEP1LINK =		# Dependent module's github link
 
-$(NAME_DYN): $(_OBJ)
-	$(CC) -shared $^ -o $@
+#DEP2 =
+#DEP2LINK =
 
-$(NAME_AR): $(_OBJ)
-	ar -rcs $@ $^
-	ranlib $@
 
-%.o: %.c
-	$(CC)  $(FLAGS) -I./ -c $< -o $@
+#DEPS=	DEP1	\	# Names of all dependencies.
+#	DEP2	\
+#	DEP3
 
-clean : 
-	rm -f $(_OBJ)
-fclean: clean
-	rm -f $(NAME).*
-
-re: fclean all
-
-test:
-	@echo "cvec test"
+include modMakefile

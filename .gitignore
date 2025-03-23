@@ -1,5 +1,15 @@
 *.o
-*.a
 *.so
+*.a
 .*.swp
 .*.swo
+test/run
+test/*.o
+test/*.out
+test/*.err
+test/*.wrn
+test/*.log
+test/*.so
+test/*.a
+test/.*.swp
+test/.*.swo
